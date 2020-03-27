@@ -30,7 +30,7 @@ class Jeu
 				if(index < h)
 					puts"case droite, 0 ,"+index.to_s
 				else
-					puts"case gauche,"+(index%l).to_s + (index%h).to_s
+					puts"case gauche,"+((index-h)/h.to_i).to_s + (index%h).to_s
 				end
 			}
 			@traitv[index] = box
