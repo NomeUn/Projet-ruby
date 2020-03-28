@@ -7,8 +7,8 @@ class Jeu
 		@window = Gtk::Window.new
 		@grille = Gtk::Grid.new
 		@grille.set_border_width(10)
-		h = 5
-		l = 4
+		h = 8
+		l = 11
 		@window.add(@grille)
 		@traith = Array.new(l*(h+1))
 		@traitv = Array.new(h*(l+1))
@@ -16,8 +16,25 @@ class Jeu
 
 		@traith.each_index { |index|
 			box = Gtk::EventBox.new()
-			box.signal_connect('button_press_event'){
+			box.set_size_request(32,8)
+			box.signal_connect('button_release_event'){|widget,event|
+				if(event.state.button1_mask?)
+					puts "CLICK GAUCHE !"
+					clique = :CLIC_GAUCHE
+				elsif(event.state.button2_mask?)
+					puts "CLICK MOLETTE !"
+				elsif(event.state.button3_mask?)
+					puts "CLICK DROIT !"
+					clique = :CLIC_DROIT
+				end
 				puts"clicked h "+index.to_s
+				if(index%(h+1)==0)
+					#jouer( 0, (index/(h+1)).to_i, :HAUT , clique)
+					puts"case bas,"+(index/(h+1)).to_i.to_s+", 0"
+				else
+					#jouer( (index/(h+1)).to_i, index%(h+1)-1, :BAS , clique)
+					puts"case haut, "+ (index/(h+1)).to_i.to_s + (index%(h+1)-1).to_s 
+				end
 				
 			}
 			@traith[index] = box
@@ -25,12 +42,24 @@ class Jeu
 
 		@traitv.each_index { |index|
 			box = Gtk::EventBox.new()
-			box.signal_connect('button_press_event'){
+			box.set_size_request(8,32)
+			box.signal_connect('button_release_event'){|widget,event|
+				if(event.state.button1_mask?)
+					puts "CLICK GAUCHE !"
+					clique = :CLIC_GAUCHE
+				elsif(event.state.button2_mask?)
+					puts "CLICK MOLETTE !"
+				elsif(event.state.button3_mask?)
+					puts "CLICK DROIT !"
+					clique = :CLIC_DROIT
+				end
 				puts"clicked v "+index.to_s
 				if(index < h)
 					puts"case droite, 0 ,"+index.to_s
+					#jouer(0, index, :GAUCHE, clique)
 				else
 					puts"case gauche,"+((index-h)/h.to_i).to_s + (index%h).to_s
+					#jouer((index-h)/h.to_i, index%h, :DROITE, clique)
 				end
 			}
 			@traitv[index] = box
