@@ -29,7 +29,7 @@ class Jeu
 				end
 				puts"clicked h "+index.to_s
 				if(index%(h+1)==0)
-					#jouer( 0, (index/(h+1)).to_i, :HAUT , clique)
+					#jouer( (index/(h+1)).to_i, 0, :HAUT , clique)
 					puts"case bas,"+(index/(h+1)).to_i.to_s+", 0"
 				else
 					#jouer( (index/(h+1)).to_i, index%(h+1)-1, :BAS , clique)
