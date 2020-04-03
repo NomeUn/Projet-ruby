@@ -39,7 +39,7 @@ class Jeu
 			}
 			@traith[index] = box
 		} 
-
+		
 		@traitv.each_index { |index|
 			box = Gtk::EventBox.new()
 			box.set_size_request(8,32)
@@ -82,7 +82,7 @@ class Jeu
 						@grille.attach(@traith[indiceh],i,j,1,1)
 						indiceh += 1
 					else
-						@grille.attach(Gtk::Label.new("case "+i.to_s() +" "+ j.to_s(), true),i,j,1,1)
+						@grille.attach(Gtk::Label.new(i.to_s() +" "+ j.to_s(), true),i,j,1,1)
 					end
 				end
 			end
